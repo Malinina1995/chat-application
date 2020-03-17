@@ -1,0 +1,12 @@
+.nav{
+  flex-basis: 15%;
+  margin-top: 10px;
+}
+
+.is-active{
+  color: black;
+}
+
+.is-active:hover{
+  color: #666;
+}

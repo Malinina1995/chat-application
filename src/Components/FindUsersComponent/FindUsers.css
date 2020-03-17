@@ -1,0 +1,96 @@
+.findUsers{
+  padding: 20px 20px 0 20px;
+  overflow: auto;
+  width: 100%;
+}
+
+.findUsers .userItem:last-of-type{
+  margin-bottom: 20px;
+}
+
+.userItem{
+  border-bottom: 1px rgba(0,0,0,.075) solid;
+  width: 100%;
+}
+
+.userItem-mainContainer{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.userItem-leftContainer{
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  padding-right: 20px;
+}
+
+.userItem_avatarka{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 10px 20px 10px 0;
+}
+
+.userItem_status{
+  display: inline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userItem_info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  min-width: 1px;
+}
+
+.userItem_fullName{
+  font-weight: bold;
+}
+
+.userItem_buttons{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 86px;
+  width: 86px;
+}
+
+.userItem_location-country{
+  padding-left: 10px;
+  color: rgba(81, 41, 12, 0.41);
+}
+
+.userItem_location-city{
+  padding-left: 5px;
+  color: rgba(81, 41, 12, 0.41);
+}
+
+.activeCurrentPage{
+  font-weight: bold;
+}
+
+.pagination{
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.userItem_link{
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  padding-right: 20px;
+  color: #000;
+  text-decoration: none;
+}
+
+.userItem_link:hover{
+  color: #666;
+  text-decoration: none;
+}

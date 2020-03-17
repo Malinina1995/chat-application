@@ -1,0 +1,19 @@
+.textarea{
+  margin: 20px 20px 0 20px;
+}
+
+.textarea-send{
+  margin: 10px 0;
+}
+
+.profile_posts{
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile_posts-items{
+  height: 100%;
+  overflow: auto;
+}
