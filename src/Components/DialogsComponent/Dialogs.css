@@ -21,9 +21,6 @@
   flex-direction: column;
 }
 
-.send-message{
-  height: 70px; 
-}
 
 .message_messages-textarea-send textarea{
   width: 100%;

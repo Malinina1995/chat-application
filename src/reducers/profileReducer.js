@@ -2,7 +2,6 @@
 import { profileAPI } from "../api/api";
 
 const ADD_POST = "ADD-POST";
-const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 const GET_USER_STATUS = "GET-USER-STATUS";
 
@@ -12,7 +11,6 @@ let initialState = {
     { id: 2, message: "Good!" },
     { id: 3, message: "briliant!" }
   ],
-  newPostText: "",
   profile: null,
   status: ''
 };
@@ -20,25 +18,20 @@ let initialState = {
 export let profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
-      let postText = { ...state }.newPostText.trim();
-      if (postText) {
+      let text = action.text;
+      if (text.trim()) {
         return {
           ...state,
-          newPostText: '',
           posts: [
             ...state.posts,
             {
               id: state.posts.length + 1,
-              message: postText 
+              message: text.trim()
             }
           ]
         };
       }
-    case CHANGE_POST_TEXT:
-      return {
-        ...state,
-        newPostText: action.newText
-      };
+      return state;
     case SET_USER_PROFILE:
       return {
         ...state,
@@ -54,16 +47,10 @@ export let profileReducer = (state = initialState, action) => {
   }
 };
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = text => {
   return {
-    type: ADD_POST
-  };
-};
-
-export const changePostTextActionCreator = text => {
-  return {
-    type: CHANGE_POST_TEXT,
-    newText: text
+    type: ADD_POST,
+    text
   };
 };
 

@@ -7,8 +7,7 @@ import { Dialogs } from "./Dialogs";
 import { authRedirect, authRedirectAwaiter } from "../../hoc/AuthRedirect";
 
 import {
-  addMessageActionCreator,
-  changeMessageActionCreator
+  addMessageActionCreator
 } from "../../reducers/dialogsReducer";
 
 let mapStateToProps = state => {
@@ -21,8 +20,7 @@ export let DialogsContainer = compose(
   connect(
     mapStateToProps,
     {
-      addMessage: addMessageActionCreator,
-      changeMessageText: changeMessageActionCreator
+      addMessage: addMessageActionCreator
     }
   ),
   authRedirectAwaiter,

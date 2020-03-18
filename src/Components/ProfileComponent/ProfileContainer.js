@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
 import { compose } from "redux";
 
+
 import { Profile } from "./Profile";
 import {
   getUserThunkCreator,
@@ -28,14 +29,12 @@ class ProfileContainer extends Component {
         {!this.props.profile ? (
           <Preloader />
         ) : (
-          <div>
             <Profile
               {...this.props}
               profile={this.props.profile}
               status={this.props.status}
               updateUserStatus={this.props.updateUserStatusThunkCreator}
             />
-          </div>
         )}
       </>
     );

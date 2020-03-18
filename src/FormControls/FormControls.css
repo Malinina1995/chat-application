@@ -1,0 +1,12 @@
+.errorTextarea{
+  border: 1px solid red;
+}
+
+.errorSpan{
+  padding: 3px;
+  color: crimson;
+}
+
+.send-message{
+  height: 70px; 
+}

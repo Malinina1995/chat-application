@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 
 import { MyPosts } from "./MyPosts";
 import {
-  addPostActionCreator,
-  changePostTextActionCreator
+  addPostActionCreator
 } from "../../../reducers/profileReducer";
 
 let mapStateToProps = state => {
@@ -17,7 +16,6 @@ let mapStateToProps = state => {
 export let MyPostsContainer = connect(
   mapStateToProps,
   {
-    addPost: addPostActionCreator,
-    onChangeText: changePostTextActionCreator
+    addPost: addPostActionCreator
   }
 )(MyPosts);

@@ -1,25 +1,23 @@
-import React, { Component } from "react";
-import { render } from "react-dom";
-import { NavLink, Redirect } from "react-router-dom";
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import { NavLink, Redirect } from 'react-router-dom';
+import { Field, reduxForm } from 'redux-form';
 
 import "./Dialogs.css";
 
-import { DialogItem } from "./DialogItemComponent/DialogItem";
-import { Message } from "./MessageComponent/Message";
+import { DialogItem } from './DialogItemComponent/DialogItem';
+import { Message } from './MessageComponent/Message';
+import { Textarea } from '../../FormControls/FormControls';
+import { required, maxLength } from '../../utils/validators/validators';
 
 export function Dialogs(props) {
 
-  let onAddMessage = () => {
-    props.addMessage();
-  };
+  if (!props.isAuth) {
+    return <Redirect to={"/login"} />;
+  }
 
-  let onChangeMessageText = event => {
-    let text = event.target.value;
-    props.changeMessageText(text);
-  };
-
-  if(!props.isAuth){
-    return <Redirect to={'/login'}/>
+  let addNewMessage = formData => {
+    props.addMessage(formData.newMessageText);
   }
 
   return (
@@ -37,26 +35,36 @@ export function Dialogs(props) {
             return <Message key={message.id} message={message.message} />;
           })}
         </div>
-        <div className="message_messages-textarea-send">
-          <textarea
-            className="form-control send-message"
-            type="text"
-            placeholder="Введите сообщение..."
-            aria-label="Search"
-            value={props.dialogsPage.newMessageText}
-            onChange={onChangeMessageText}
-          />
-          <div>
-            <button
-              className="btn btn-primary"
-              type="submit"
-              onClick={onAddMessage}
-            >
-              Send
-            </button>
-          </div>
-        </div>
+        <AddMessageReduxForm onSubmit={addNewMessage}/>
       </div>
     </div>
   );
 }
+
+let maxLength100 = maxLength(100);
+
+const DialogsForm = props => {
+  return (
+    <form className="message_messages-textarea-send" onSubmit={props.handleSubmit}>
+      <Field
+        component={Textarea}
+        name='newMessageText'
+        type="text"
+        placeholder="Введите сообщение..."
+        aria-label="Search"
+        validate={[required, maxLength100]}
+      />
+      <div>
+        <button
+          className="btn btn-primary"
+        >
+          Send
+        </button>
+      </div>
+    </form>
+  );
+};
+
+const AddMessageReduxForm = reduxForm({
+  form: "addMessage"
+})(DialogsForm);
