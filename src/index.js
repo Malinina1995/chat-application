@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 
 import "./style.css";
 
-import { App } from "./src/Components/AppComponent/App";
+import { App } from "./Components/AppComponent/App";
 import { store } from "./redux-store";
 
 
