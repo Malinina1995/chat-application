@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { Preloader } from "../../PreloaderComponent/Preloader";
 
 import "./ProfileInfo.css";
-import { ProfileStatus } from "../ProfileStatus/ProfileStatus";
+import { ProfileStatusWithHooks } from "../ProfileStatus/ProfileStatusWithHooks";
 
 export function ProfileInfo(props) {
   if(!props.profile){
@@ -15,7 +15,7 @@ export function ProfileInfo(props) {
       <img src={imagePath} className='profile_info-avatar'/ >
       <div className='profile_information'>
         <span className='profile_info-name'>{props.profile.fullName}</span>
-        <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
+        <ProfileStatusWithHooks status={props.status} updateUserStatus={props.updateUserStatus}/>
       </div>
     </div>
   );

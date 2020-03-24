@@ -16,7 +16,7 @@ let mapStateToProps = state => {
   };
 };
 
-export let DialogsContainer = compose(
+export default compose(
   connect(
     mapStateToProps,
     {

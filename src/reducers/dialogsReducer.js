@@ -1,4 +1,4 @@
-const ADD_MESSAGE = "ADD-MESSAGE";
+const ADD_MESSAGE = "dialogs/ADD-MESSAGE";
 
 let initialState = {
   dialogs: [
@@ -20,18 +20,20 @@ let initialState = {
 export let dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_MESSAGE:
-      if (action.newText) {
+      let text = action.newText;
+      if (text.trim()) {
         return {
           ...state,
           messages: [
             ...state.messages,
             {
               id: state.messages.length + 1,
-              message: action.newText.trim() 
+              message: text.trim()
             }
           ]
         };
       }
+      return state;
     default:
       return state;
   }

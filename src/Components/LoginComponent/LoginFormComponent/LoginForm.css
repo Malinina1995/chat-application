@@ -6,3 +6,7 @@
 .button-login{
   margin-top: 15px;
 }
+
+.someError{
+  color: red;
+}

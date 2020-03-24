@@ -1,10 +1,9 @@
 .errorTextarea{
-  border: 1px solid red;
+  border: 2px solid red;
 }
 
-.errorSpan{
-  padding: 3px;
-  color: crimson;
+.borderColor{
+  border: 2px solid transparent;
 }
 
 .send-message{

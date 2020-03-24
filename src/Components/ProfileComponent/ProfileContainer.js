@@ -18,7 +18,7 @@ class ProfileContainer extends Component {
   componentDidMount() {
     let userId = this.props.match.params.userId
       ? this.props.match.params.userId
-      : 2;
+      : this.props.logUserId;
     this.props.getUserThunkCreator(userId);
     this.props.getUserStatusThunkCreator(userId);
   }
@@ -44,11 +44,13 @@ class ProfileContainer extends Component {
 let mapStateToProps = state => {
   return {
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    logUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
   };
 };
 
-export let ProfilesContainer = compose(
+export default compose(
   connect(
     mapStateToProps,
     {

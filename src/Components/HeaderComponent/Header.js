@@ -11,7 +11,12 @@ export function Header(props) {
         <Link to="/">IT-community</Link>
       </h5>
       {props.isAuth ? (
-        props.login
+        <div>
+          <span className="login-name">{props.login}</span>
+          <button type="button" className="btn btn-outline-primary" onClick={props.logoutThunkCreator}>
+            Logout
+          </button>
+        </div>
       ) : (
         <Link className="btn btn-outline-primary" to={"/login"}>
           Sign up

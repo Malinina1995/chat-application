@@ -4,8 +4,17 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { compose } from "redux";
 
-import { Users } from "./FindUsers";
+import { Users } from "./Users";
 import { authRedirect, authRedirectAwaiter } from "../../hoc/AuthRedirect";
+
+import {
+  getUsers,
+  getPageSize,
+  getTotalUsersCount,
+  getCurrentPage,
+  getIsFetching,
+  getFollowInProgress
+} from "../../reducers/users-selector";
 
 import {
   followActionCreator,
@@ -14,10 +23,10 @@ import {
   getUserThunkCreator,
   followUserThunkCreator,
   unfollowUserThunkCreator
-} from "../../reducers/findUsersReducer";
+} from "../../reducers/usersReducer";
 import { Preloader } from "../PreloaderComponent/Preloader";
 
-class FindUsers extends Component {
+class UsersContainer extends Component {
   componentDidMount() {
     this.props.getUserThunkCreator(this.props.pageSize, this.props.currentPage);
   }
@@ -50,16 +59,16 @@ class FindUsers extends Component {
 
 let mapStateToProps = state => {
   return {
-    users: state.friendsPage.users,
-    pageSize: state.friendsPage.pageSize,
-    totalUsersCount: state.friendsPage.totalUsersCount,
-    currentPage: state.friendsPage.currentPage,
-    isFetching: state.friendsPage.isFetching,
-    followInProgress: state.friendsPage.followInProgress
+    users: getUsers(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
+    followInProgress: getFollowInProgress(state)
   };
 };
 
-export let FindUsersContainer = compose(
+export default compose(
   connect(
     mapStateToProps,
     {
@@ -73,4 +82,4 @@ export let FindUsersContainer = compose(
   ),
   authRedirectAwaiter,
   authRedirect
-)(FindUsers);
+)(UsersContainer);

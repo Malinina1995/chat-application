@@ -3,7 +3,7 @@ import { Header } from './Header';
 import { connect } from 'react-redux';
 import { authAPI } from "../../api/api";
 
-import { authThunkCreator } from '../../reducers/authReducer';
+import { authThunkCreator, logoutThunkCreator } from '../../reducers/authReducer';
 
 class Container extends Component {
   componentDidMount() {
@@ -20,4 +20,4 @@ const mapStateToProps = state => ({
   login: state.auth.login
 });
 
-export let HeaderContainer = connect(mapStateToProps, {authThunkCreator})(Container);
+export let HeaderContainer = connect(mapStateToProps, {authThunkCreator, logoutThunkCreator})(Container);

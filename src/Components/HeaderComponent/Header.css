@@ -2,6 +2,10 @@
   color: black;
 }
 
+.login-name{
+  padding-right: 15px;
+}
+
 .header h5 a:hover{
   text-decoration: none;
 }

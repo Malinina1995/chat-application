@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, lazy, Suspense } from "react";
 import { render } from "react-dom";
 import {
   BrowserRouter as Router,
@@ -10,13 +10,19 @@ import {
 
 import { HeaderContainer } from "../HeaderComponent/HeaderContainer";
 import { Nav } from "../NavComponent/Nav";
-import { ProfilesContainer } from "../ProfileComponent/ProfileContainer";
-import { DialogsContainer } from "../DialogsComponent/DialogsContainer";
 import { News } from "../NewsComponent/News";
 import { Music } from "../MusicComponent/Music";
 import { Settings } from "../SettingsComponent/Settings";
-import { FindUsersContainer } from "../FindUsersComponent/FindUsersContainer";
-import { Login } from "../LoginComponent/Login";
+import { withSuspanse } from "../../hoc/withSuspanse";
+
+const ProfileContainer = lazy(() =>
+  import("../ProfileComponent/ProfileContainer")
+);
+const DialogsContainer = lazy(() =>
+  import("../DialogsComponent/DialogsContainer")
+);
+const UsersContainer = lazy(() => import("../UsersComponent/UsersContainer"));
+const LoginContainer = lazy(() => import("../LoginComponent/Login"));
 
 import "./App.css";
 
@@ -29,13 +35,16 @@ export function App(props) {
           <Nav />
           <div className="main-content">
             <Switch>
-              <Route path="/profile/:userId?" component={ProfilesContainer} />
-              <Route path="/dialogs" component={DialogsContainer} />
-              <Route path="/users" component={FindUsersContainer} />
+              <Route
+                path="/profile/:userId?"
+                render={withSuspanse(ProfileContainer)}
+              />
+              <Route path="/dialogs" render={withSuspanse(DialogsContainer)} />
+              <Route path="/users" render={withSuspanse(UsersContainer)} />
               <Route path="/news" component={News} />
               <Route path="/music" component={Music} />
               <Route path="/settings" component={Settings} />
-              <Route path="/login" component={Login} />
+              <Route path="/login" render={withSuspanse(LoginContainer)} />
             </Switch>
           </div>
         </div>

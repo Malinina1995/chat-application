@@ -1,19 +1,10 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
-import Pagination from "react-pagination-library";
-import "react-pagination-library/build/css/index.css";
 import { NavLink } from "react-router-dom";
 
-import "./FindUsers.css";
-import { followUsers } from "../../api/api";
-import { usersAPI } from "../../api/api";
+import "./Users.css";
 
-export let Users = props => {
-  let buttonCount = Math.ceil(props.totalUsersCount / props.pageSize);
-
-  return (
-    <div className="findUsers">
-      {props.users.map(user => {
+export let User = ({user, followInProgress, unfollow, follow}) => {
         return (
           <div key={user.id * Math.random()} className="userItem">
             <div className="userItem-mainContainer">
@@ -37,10 +28,10 @@ export let Users = props => {
                 {user.followed ? (
                   <button
                     type="button"
-                    disabled={props.followInProgress.some(id => id === user.id)}
+                    disabled={followInProgress.some(id => id === user.id)}
                     className="btn btn-danger"
                     onClick={() => {
-                        props.unfollow(user.id);
+                        unfollow(user.id);
                     }}
                   >
                     Unfollow
@@ -48,10 +39,10 @@ export let Users = props => {
                 ) : (
                   <button
                     type="button"
-                    disabled={props.followInProgress.some(id => id === user.id)}
+                    disabled={followInProgress.some(id => id === user.id)}
                     className="btn btn-success"
                     onClick={() => {
-                      props.follow(user.id);
+                      follow(user.id);
                     }}
                   >
                     Follow
@@ -61,13 +52,4 @@ export let Users = props => {
             </div>
           </div>
         );
-      })}
-      <Pagination
-        currentPage={props.currentPage}
-        totalPages={buttonCount}
-        changeCurrentPage={props.onCurrentPageCnanged}
-        theme="bottom-border"
-      />
-    </div>
-  );
 };
