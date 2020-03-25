@@ -12,7 +12,9 @@ export function Profile(props) {
       <ProfileInfo
         profile={props.profile}
         status={props.status}
+        isOwner={props.isOwner}
         updateUserStatus={props.updateUserStatus}
+        savePhoto={props.savePhoto}
       />
       <div className="profile_posts">
         <MyPostsContainer />

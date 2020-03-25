@@ -9,13 +9,24 @@ import { Profile } from "./Profile";
 import {
   getUserThunkCreator,
   getUserStatusThunkCreator,
-  updateUserStatusThunkCreator
+  updateUserStatusThunkCreator,
+  savePhotoThunkCreator
 } from "../../reducers/profileReducer";
 import { Preloader } from "../PreloaderComponent/Preloader";
 import { authRedirect, authRedirectAwaiter } from "../../hoc/AuthRedirect";
 
 class ProfileContainer extends Component {
   componentDidMount() {
+    this.refreshProfile();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if(this.props.match.params.userId != prevProps.match.params.userId){
+      this.refreshProfile();
+    }
+  }
+
+  refreshProfile() {
     let userId = this.props.match.params.userId
       ? this.props.match.params.userId
       : this.props.logUserId;
@@ -33,6 +44,8 @@ class ProfileContainer extends Component {
               {...this.props}
               profile={this.props.profile}
               status={this.props.status}
+              isOwner={!this.props.match.params.userId}
+              savePhoto={this.props.savePhotoThunkCreator}
               updateUserStatus={this.props.updateUserStatusThunkCreator}
             />
         )}
@@ -56,7 +69,8 @@ export default compose(
     {
       getUserThunkCreator,
       getUserStatusThunkCreator,
-      updateUserStatusThunkCreator
+      updateUserStatusThunkCreator,
+      savePhotoThunkCreator
     }
   ),
   withRouter,

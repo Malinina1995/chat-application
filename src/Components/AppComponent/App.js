@@ -1,11 +1,8 @@
-import React, { Component, lazy, Suspense } from "react";
-import { render } from "react-dom";
+import React, { lazy } from "react";
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  Redirect
+  Redirect, HashRouter
 } from "react-router-dom";
 
 import { HeaderContainer } from "../HeaderComponent/HeaderContainer";
@@ -14,6 +11,7 @@ import { News } from "../NewsComponent/News";
 import { Music } from "../MusicComponent/Music";
 import { Settings } from "../SettingsComponent/Settings";
 import { withSuspanse } from "../../hoc/withSuspanse";
+import "./App.css";
 
 const ProfileContainer = lazy(() =>
   import("../ProfileComponent/ProfileContainer")
@@ -24,11 +22,10 @@ const DialogsContainer = lazy(() =>
 const UsersContainer = lazy(() => import("../UsersComponent/UsersContainer"));
 const LoginContainer = lazy(() => import("../LoginComponent/Login"));
 
-import "./App.css";
 
 export function App(props) {
   return (
-    <Router>
+    <HashRouter>
       <div className="app container">
         <HeaderContainer />
         <div className="content">
@@ -45,10 +42,11 @@ export function App(props) {
               <Route path="/music" component={Music} />
               <Route path="/settings" component={Settings} />
               <Route path="/login" render={withSuspanse(LoginContainer)} />
+              <Redirect  from='/' to='/profile'/>
             </Switch>
           </div>
         </div>
       </div>
-    </Router>
+    </HashRouter>
   );
 }

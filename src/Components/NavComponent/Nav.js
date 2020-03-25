@@ -31,7 +31,7 @@ export function Nav() {
             </li>
             <li className="nav-item">
               <NavLink to="/users" className="nav-link" activeClassName='is-active'>
-                Find Users
+                Users
               </NavLink>
             </li>
             <li className="nav-item">

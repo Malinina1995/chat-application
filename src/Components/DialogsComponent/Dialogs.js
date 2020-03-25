@@ -50,7 +50,7 @@ const DialogsForm = props => {
         component={Textarea}
         name='newMessageText'
         type="text"
-        placeholder="Введите сообщение..."
+        placeholder="Write a message..."
         aria-label="Search"
         validate={[required, maxLength100]}
       />

@@ -33,7 +33,7 @@ function PostsForm(props) {
       <Field
         component={Textarea}
         name="newPostText"
-        placeholder="Что у вас нового?"
+        placeholder="What's new?"
         rows="3"
         validate={[required, maxLength30]}
       />
