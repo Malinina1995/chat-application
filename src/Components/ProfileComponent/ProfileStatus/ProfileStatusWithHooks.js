@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import "./ProfileStatus.css"
 
 export let ProfileStatusWithHooks = props => {
   let [editMode, setEditMode] = useState(false);
   let [status, setStatus] = useState(props.status);
 
   const activateEditMode = () => {
-    setEditMode(true);
+    props.isOwner ? setEditMode(true) : setEditMode(false);
   };
 
   const deactivateEditMode = () => {
@@ -22,7 +23,7 @@ export let ProfileStatusWithHooks = props => {
   }, [props.status]);
 
   return (
-    <div>
+    <div className='profile-status'>
       {!editMode ? (
         <div onDoubleClick={activateEditMode}>
           {props.status || "No status"}

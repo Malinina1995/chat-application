@@ -10,7 +10,8 @@ import {
   getUserThunkCreator,
   getUserStatusThunkCreator,
   updateUserStatusThunkCreator,
-  savePhotoThunkCreator
+  savePhotoThunkCreator,
+  saveDataThunkCreator
 } from "../../reducers/profileReducer";
 import { Preloader } from "../PreloaderComponent/Preloader";
 import { authRedirect, authRedirectAwaiter } from "../../hoc/AuthRedirect";
@@ -46,6 +47,7 @@ class ProfileContainer extends Component {
               status={this.props.status}
               isOwner={!this.props.match.params.userId}
               savePhoto={this.props.savePhotoThunkCreator}
+              saveData={this.props.saveDataThunkCreator}
               updateUserStatus={this.props.updateUserStatusThunkCreator}
             />
         )}
@@ -70,7 +72,8 @@ export default compose(
       getUserThunkCreator,
       getUserStatusThunkCreator,
       updateUserStatusThunkCreator,
-      savePhotoThunkCreator
+      savePhotoThunkCreator,
+      saveDataThunkCreator
     }
   ),
   withRouter,

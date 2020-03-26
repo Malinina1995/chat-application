@@ -4,7 +4,7 @@ const instance = axios.create({
   withCredentials: true,
   baseURL: "https://test-api.mokeev1995.ru/api/1.0/",
   headers: {
-    "API-KEY": "ba70ec26-57ac-470b-860a-3c404909718d"
+    "API-KEY": "4531d9e2-5896-44a2-8434-2e6848972af0"
   }
 });
 
@@ -31,6 +31,18 @@ export const profileAPI = {
   },
   updateStatus(status) {
     return instance.put('profile/status', {status}).then(res => res.data);
+  },
+  savePhoto(file) {
+    const formData = new FormData();
+    formData.append('image', file);
+    return instance.put('profile/photo', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then(res => res.data);
+  },
+  saveProfile(data) {
+    return instance.put('profile', data).then(res => res.data);
   }
 };
 

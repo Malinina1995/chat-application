@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./ProfileStatus.css";
 
 export class ProfileStatus extends Component {
   state = {
@@ -35,7 +36,7 @@ export class ProfileStatus extends Component {
 
   render() {
     return (
-      <div>
+      <div className='profile-status'>
         {!this.state.editMode ? (
           <div onDoubleClick={this.activateEditMode}>
             {this.props.status || "No status"}

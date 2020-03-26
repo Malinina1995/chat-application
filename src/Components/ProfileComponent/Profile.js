@@ -15,6 +15,7 @@ export function Profile(props) {
         isOwner={props.isOwner}
         updateUserStatus={props.updateUserStatus}
         savePhoto={props.savePhoto}
+        saveData={props.saveData}
       />
       <div className="profile_posts">
         <MyPostsContainer />

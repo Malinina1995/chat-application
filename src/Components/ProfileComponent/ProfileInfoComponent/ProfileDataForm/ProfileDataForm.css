@@ -1,0 +1,15 @@
+.someError{
+  color: red;
+}
+
+.profile_info-checkbox{
+  display: flex;
+  align-items: center;
+}
+
+.profile_info-checkbox-title{
+  flex-basis: 60%;
+}
+
+.profile_info-checkbox-input{
+}

@@ -1,11 +1,15 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { render } from "react-dom";
 import { Preloader } from "../../PreloaderComponent/Preloader";
 
 import "./ProfileInfo.css";
 import { ProfileStatusWithHooks } from "../ProfileStatus/ProfileStatusWithHooks";
+import { ProfileData } from "./ProfileDataComponent/ProfileData";
+import { ProfileDataFormReduxForm } from "./ProfileDataForm/ProfileDataForm";
 
 export function ProfileInfo(props) {
+  let [editMode, setEditMode] = useState(false);
+
   if (!props.profile) {
     return <Preloader />;
   }
@@ -16,27 +20,47 @@ export function ProfileInfo(props) {
     }
   };
 
+  const onSubmit = formData => {
+    props.saveData(formData).then(()=>{
+      setEditMode(false);
+    })
+  };
+
   let imagePath = props.profile.photos.large
     ? props.profile.photos.large
     : "https://avatars.mds.yandex.net/get-pdb/1732371/78b3b128-3813-4d35-8b87-b3c911581ca0/s1200?webp=false";
   return (
     <>
       <div className="profile_info">
-        <img src={imagePath} className="profile_info-avatar" />
+        <div>
+          <img src={imagePath} className="profile_info-avatar" />
+        </div>
         <div className="profile_information">
           <span className="profile_info-name">{props.profile.fullName}</span>
           <ProfileStatusWithHooks
             status={props.status}
+            isOwner={props.isOwner}
             updateUserStatus={props.updateUserStatus}
           />
-          <span>{props.profile.aboutMe}</span>
-          <span>{props.profile.lookingForAJob}</span>
-          <span>{props.profile.lookingForAJobDescription}</span>
+          {editMode ? (
+            <ProfileDataFormReduxForm
+              initialValues={props.profile}
+              onSubmit={onSubmit}
+            />
+          ) : (
+            <ProfileData
+              goToEditMode={() => {
+                setEditMode(true);
+              }}
+              profile={props.profile}
+              isOwner={props.isOwner}
+            />
+          )}
         </div>
       </div>
       {props.isOwner && (
         <div className="profile_info-addPhoto">
-          Update avatar <input type="file" onChange={onMainPhotoSelector}/>
+          Update avatar <input type="file" onChange={onMainPhotoSelector} />
         </div>
       )}
     </>
