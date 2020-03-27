@@ -5,7 +5,7 @@ import { Input } from "../../../FormControls/FormControls";
 import { required } from "../../../utils/validators/validators";
 
 
-export let LoginForm = ({handleSubmit, error}) => {
+export let LoginForm = ({handleSubmit, error, captchaUrl}) => {
   return (
     <form className="login-form" onSubmit={handleSubmit}>
       <div className="form-group">
@@ -26,7 +26,6 @@ export let LoginForm = ({handleSubmit, error}) => {
           validate={[required]}
           name="password"
           placeholder="Введите пароль"
-          
         />
       </div>
       <div className="form-check">
@@ -41,6 +40,19 @@ export let LoginForm = ({handleSubmit, error}) => {
         </label>
       </div>
       <div className='someError'>{error}</div>
+      {
+        captchaUrl && <img src={captchaUrl} alt=''/>
+      }
+      {
+        captchaUrl &&
+        <Field
+          component={Input}
+          type="text"
+          validate={[required]}
+          name="captcha"
+          style={{marginTop:'15px'}}
+        />
+      }
       <button type="submit" className="btn btn-primary button-login">
         Login
       </button>

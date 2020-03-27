@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Header } from './Header';
 import { connect } from 'react-redux';
-import { authAPI } from "../../api/api";
 
 import { authThunkCreator, logoutThunkCreator } from '../../reducers/authReducer';
 

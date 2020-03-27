@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import { NavLink, Redirect } from 'react-router-dom';
+import React  from 'react';
+import { Redirect } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 
 import "./Dialogs.css";

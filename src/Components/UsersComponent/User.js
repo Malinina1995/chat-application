@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import { render } from "react-dom";
+import React  from "react";
 import { NavLink } from "react-router-dom";
 
 import "./Users.css";
@@ -16,6 +15,7 @@ export let User = ({user, followInProgress, unfollow, follow}) => {
                         ? user.photos.small
                         : "https://avatars.mds.yandex.net/get-pdb/1732371/78b3b128-3813-4d35-8b87-b3c911581ca0/s1200?webp=false"
                     }
+                    alt=''
                     className="userItem_avatarka"
                   />
                   <div className="userItem_info">

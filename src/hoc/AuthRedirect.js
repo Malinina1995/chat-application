@@ -1,5 +1,5 @@
 import { Redirect } from 'react-router-dom';
-import React, { Component } from 'react';
+import React  from 'react';
 import { connect } from "react-redux";
 import { authThunkCreator } from '../reducers/authReducer';
 import { Preloader } from '../Components/PreloaderComponent/Preloader';
@@ -9,7 +9,7 @@ export const authRedirect = (Component) => {
   
   let mapStateToRedirect = (state) => ({
     isAuth: state.auth.isAuth
-  })
+  });
   class RedirectComponent extends React.Component {
     
     render() {
@@ -23,13 +23,13 @@ export const authRedirect = (Component) => {
   let connectAuthRedirect = connect(mapStateToRedirect)(RedirectComponent);
 
   return connectAuthRedirect;
-}
+};
 
 export const authRedirectAwaiter = (Component) => {
   
   let mapStateToRedirect = (state) => ({
     isAuth: state.auth.isAuth
-  })
+  });
   class AuthRedirectAwaiter extends React.Component {
     componentDidMount() {
       this.props.authThunkCreator();
@@ -47,4 +47,4 @@ export const authRedirectAwaiter = (Component) => {
   let connectAuthRedirect = connect(mapStateToRedirect, {authThunkCreator})(AuthRedirectAwaiter);
 
   return connectAuthRedirect;
-}
+};

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
 import { connect } from "react-redux";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 
 
@@ -22,7 +21,7 @@ class ProfileContainer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if(this.props.match.params.userId != prevProps.match.params.userId){
+    if(this.props.match.params.userId !== prevProps.match.params.userId){
       this.refreshProfile();
     }
   }

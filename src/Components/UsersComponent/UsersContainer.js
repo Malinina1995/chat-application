@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import { compose } from "redux";
 
 import { Users } from "./Users";

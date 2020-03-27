@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import { render } from "react-dom";
+import React  from "react";
 import { Field, reduxForm } from "redux-form";
 import { required, maxLength } from "../../../utils/validators/validators";
 import { Textarea } from "../../../FormControls/FormControls";

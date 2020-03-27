@@ -1,5 +1,4 @@
-import React, { Component, useState } from "react";
-import { render } from "react-dom";
+import React, { useState } from "react";
 import { Preloader } from "../../PreloaderComponent/Preloader";
 
 import "./ProfileInfo.css";
@@ -33,7 +32,7 @@ export function ProfileInfo(props) {
     <>
       <div className="profile_info">
         <div>
-          <img src={imagePath} className="profile_info-avatar" />
+          <img src={imagePath} alt='' className="profile_info-avatar" />
         </div>
         <div className="profile_information">
           <span className="profile_info-name">{props.profile.fullName}</span>

@@ -1,12 +1,8 @@
-import React, { Component } from "react";
-import { render } from "react-dom";
+import React  from "react";
 import Pagination from "react-pagination-library";
 import "react-pagination-library/build/css/index.css";
-import { NavLink } from "react-router-dom";
 
 import "./Users.css";
-import { followUsers } from "../../api/api";
-import { usersAPI } from "../../api/api";
 import { User } from "./User";
 
 export let Users = props => {

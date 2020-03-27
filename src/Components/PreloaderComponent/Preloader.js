@@ -4,7 +4,7 @@ import "./Preloader.css";
 export let Preloader = props => {
   return (
     <div className = "preloader">
-      <img src="https://youclever.org/book/website/youclever/template/images/loader.gif"/>
+      <img src="https://youclever.org/book/website/youclever/template/images/loader.gif" alt=''/>
     </div>
   );
 };

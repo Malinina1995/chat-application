@@ -1,6 +1,6 @@
 import React from 'react';
 import './FormControls.css';
-var classNames = require('classnames');
+let classNames = require('classnames');
 
 export const Textarea = ({input, meta: { touched, error, warning }, placeholder, ...props}) => {
   const hasError =  touched && error;
