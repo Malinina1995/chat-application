@@ -83,8 +83,12 @@ export const savePhotoActionCreator = file => {
 
 export const getUserThunkCreator = id => {
   return async dispatch => {
-    let res = await profileAPI.getProfile(id);
-    dispatch(setUserProfileActionCreator(res));
+    try {
+      let res = await profileAPI.getProfile(id);
+      dispatch(setUserProfileActionCreator(res));
+    } catch (e) {
+
+    }
   };
 };
 

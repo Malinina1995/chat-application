@@ -10,7 +10,7 @@ import {Nav} from "../NavComponent/Nav";
 import {News} from "../NewsComponent/News";
 import {Music} from "../MusicComponent/Music";
 import {Settings} from "../SettingsComponent/Settings";
-import {withSuspanse} from "../../hoc/withSuspanse";
+import {withSuspense} from "../../hoc/withSuspanse";
 import "./App.css";
 
 const ProfileContainer = lazy(() =>
@@ -34,19 +34,18 @@ export function App(props) {
                         <Switch>
                             <Route
                                 path="/profile/:userId?"
-                                render={withSuspanse(ProfileContainer)}
+                                render={withSuspense(ProfileContainer)}
                             />
-                            <Route path="/dialogs" render={withSuspanse(DialogsContainer)}/>
-                            <Route path="/users" render={withSuspanse(UsersContainer)}/>
+                            <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
+                            <Route path="/users" render={withSuspense(UsersContainer)}/>
                             <Route path="/news" component={News}/>
                             <Route path="/music" component={Music}/>
                             <Route path="/settings" component={Settings}/>
-                            <Route path="/login" render={withSuspanse(LoginContainer)}/>
+                            <Route path="/login" render={withSuspense(LoginContainer)}/>
                             <Redirect from='/' to='/profile'/>
                         </Switch>
                     </div>
                 </div>
             </div>
-        </HashRouter>
-    );
+        </HashRouter>);
 }
