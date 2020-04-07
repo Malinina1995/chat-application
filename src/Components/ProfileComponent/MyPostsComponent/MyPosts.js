@@ -1,5 +1,5 @@
-import React  from "react";
-import { Field, reduxForm } from "redux-form";
+import React from "react";
+import { Field, reduxForm, reset } from "redux-form";
 import { required, maxLength } from "../../../utils/validators/validators";
 import { Textarea } from "../../../FormControls/FormControls";
 
@@ -7,42 +7,47 @@ import "./MyPosts.css";
 
 import { Post } from "../PostComponent/Post";
 
-export function MyPosts(props) {
-  let addNewPost = text => {
-    props.addPost(text.newPostText);
-  };
+const afterSubmit = (result, dispatch) =>
+    dispatch(reset('addPost'));
 
-  return (
-    <div className="profile_posts">
-      <AddPostsReduxForm onSubmit={addNewPost} />
-      <div className="profile_posts-items">
-        {[...props.profilePage.posts].reverse().map(post => {
-          return <Post key={post.id} message={post.message} />;
-        })}
-      </div>
-    </div>
-  );
+export function MyPosts(props) {
+    let addNewPost = text => {
+        props.addPost(text.newPostText);
+    };
+
+    return (
+        <div className="profile_posts">
+            <AddPostsReduxForm onSubmit={addNewPost} />
+            <div className="profile_posts-items">
+                {[...props.profilePage.posts].reverse().map(post => {
+                    return <Post key={post.id} message={post.message} />;
+                })}
+            </div>
+        </div>
+    );
 }
 
 let maxLength30 = maxLength(30);
 
 function PostsForm(props) {
-  return (
-    <form className="form-group textarea" onSubmit={props.handleSubmit}>
-      <Field
-        component={Textarea}
-        name="newPostText"
-        placeholder="What's new?"
-        rows="3"
-        validate={[required, maxLength30]}
-      />
-      <div>
-        <button className="btn btn-primary textarea-send">Add</button>
-      </div>
-    </form>
-  );
+    return (
+        <form className="form-group textarea" onSubmit={props.handleSubmit}>
+            <Field
+                component={Textarea}
+                name="newPostText"
+                placeholder="What's new?"
+                rows="3"
+                value=''
+                validate={[required, maxLength30]}
+            />
+            <div>
+                <button className="btn btn-primary textarea-send">Add</button>
+            </div>
+        </form>
+    );
 }
 
 const AddPostsReduxForm = reduxForm({
-  form: "addPost"
+    form: "addPost",
+    onSubmitSuccess: afterSubmit
 })(PostsForm);
