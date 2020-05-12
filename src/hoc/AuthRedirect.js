@@ -36,7 +36,7 @@ export const authRedirectAwaiter = (Component) => {
     }
     
     render() {
-      if(this.props.isAuth === null){
+      if(this.props.isAuth === undefined){
         return <Preloader />
       } 
       return <Component {...this.props} />

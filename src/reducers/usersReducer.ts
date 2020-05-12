@@ -1,7 +1,6 @@
 import {usersAPI} from "../api/api";
 import {UserType} from "../types";
 
-
 const FOLLOW = "user/FOLLOW";
 const UNFOLLOW = "user/UNFOLLOW";
 const SET_USERS = "user/SET-USERS";
@@ -97,7 +96,7 @@ type FollowActionCreatorType = {
     userId: number
 }
 
-export const followActionCreator = (userId: number): FollowActionCreatorType => {
+const followActionCreator = (userId: number): FollowActionCreatorType => {
     return {
         type: FOLLOW,
         userId
@@ -109,7 +108,7 @@ type UnfollowActionCreatorType = {
     userId: number
 }
 
-export const unfollowActionCreator = (userId: number): UnfollowActionCreatorType => {
+const unfollowActionCreator = (userId: number): UnfollowActionCreatorType => {
     return {
         type: UNFOLLOW,
         userId
@@ -121,7 +120,7 @@ type SetUsersActionCreatorType = {
     users: UserType[]
 }
 
-export const setUsersActionCreator = (users: UserType[]): SetUsersActionCreatorType => {
+const setUsersActionCreator = (users: UserType[]): SetUsersActionCreatorType => {
     return {
         type: SET_USERS,
         users
@@ -133,7 +132,7 @@ type SetCurrentPageActionCreatorType = {
     currentPage: number
 }
 
-export const setCurrentPageActionCreator = (currentPage: number): SetCurrentPageActionCreatorType => {
+const setCurrentPageActionCreator = (currentPage: number): SetCurrentPageActionCreatorType => {
     return {
         type: SET_CURRENT_PAGE,
         currentPage
@@ -145,7 +144,7 @@ type SetTotalUserCountActionCreatorType = {
     totalUsersCount: number
 }
 
-export const setTotalUserCountActionCreator = (totalUsersCount: number): SetTotalUserCountActionCreatorType => {
+const setTotalUserCountActionCreator = (totalUsersCount: number): SetTotalUserCountActionCreatorType => {
     return {
         type: SET_TOTAL_USER_COUNT,
         totalUsersCount
@@ -157,7 +156,7 @@ type ToggleIsFetchingActionCreatorType = {
     isFetching: boolean
 }
 
-export const toggleIsFetchingActionCreator = (isFetching: boolean): ToggleIsFetchingActionCreatorType => {
+const toggleIsFetchingActionCreator = (isFetching: boolean): ToggleIsFetchingActionCreatorType => {
     return {
         type: TOGGE_IS_FETCHING,
         isFetching
@@ -170,7 +169,7 @@ type FollowingInProgressActionCreatorType = {
     userId: number
 }
 
-export const followingInProgressActionCreator = (isFetching: boolean, userId: number): FollowingInProgressActionCreatorType => {
+const followingInProgressActionCreator = (isFetching: boolean, userId: number): FollowingInProgressActionCreatorType => {
     return {
         type: TOGGE_IS_FOLLOWING_PROGRESS,
         isFetching,
