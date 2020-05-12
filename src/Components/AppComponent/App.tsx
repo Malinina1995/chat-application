@@ -1,9 +1,5 @@
 import React, {lazy} from "react";
-import {
-    Switch,
-    Route,
-    Redirect, HashRouter
-} from "react-router-dom";
+import {HashRouter, Redirect, Route, Switch} from "react-router-dom";
 
 import {HeaderContainer} from "../HeaderComponent/HeaderContainer";
 import {Nav} from "../NavComponent/Nav";
@@ -12,6 +8,7 @@ import {Music} from "../MusicComponent/Music";
 import {Settings} from "../SettingsComponent/Settings";
 import {withSuspense} from "../../hoc/withSuspanse";
 import "./App.css";
+import {NotFound} from "../404/404";
 
 const ProfileContainer = lazy(() =>
     import("../ProfileComponent/ProfileContainer")
@@ -23,7 +20,7 @@ const UsersContainer = lazy(() => import("../UsersComponent/UsersContainer"));
 const LoginContainer = lazy(() => import("../LoginComponent/Login"));
 
 
-export function App(props) {
+export const App: React.FunctionComponent = () => {
     return (
         <HashRouter>
             <div className="app container">
@@ -42,7 +39,8 @@ export function App(props) {
                             <Route path="/music" component={Music}/>
                             <Route path="/settings" component={Settings}/>
                             <Route path="/login" render={withSuspense(LoginContainer)}/>
-                            <Redirect from='/' to='/profile'/>
+                            <Redirect exact from='/' to='/profile'/>
+                            <Route render={() => <NotFound/>}/>
                         </Switch>
                     </div>
                 </div>

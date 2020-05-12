@@ -8,7 +8,7 @@ import {
   addMessageActionCreator
 } from "../../reducers/dialogsReducer";
 
-let mapStateToProps = state => {
+let mapStateToProps = (state) => {
   return {
     dialogsPage: state.dialogsPage
   };
