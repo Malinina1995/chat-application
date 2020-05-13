@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import "./Nav.css";
 
-export function Nav() {
+export const Nav:React.FC = () => {
     return (
         <nav className="col-md-2 d-none d-md-block bg-light sidebar">
         <div className="sidebar-sticky">

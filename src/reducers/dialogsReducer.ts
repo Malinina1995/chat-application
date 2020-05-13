@@ -1,14 +1,6 @@
+import {DialogType, MessageType} from "../types";
+
 const ADD_MESSAGE = "dialogs/ADD-MESSAGE";
-
-type DialogType = {
-    id: number;
-    name: string
-}
-
-type MessageType = {
-    id: number;
-    message: string
-}
 
 type InitialStateType = {
     dialogs: DialogType[];

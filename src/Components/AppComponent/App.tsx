@@ -1,7 +1,7 @@
 import React, {lazy} from "react";
 import {HashRouter, Redirect, Route, Switch} from "react-router-dom";
 
-import {HeaderContainer} from "../HeaderComponent/HeaderContainer";
+import HeaderContainer from "../HeaderComponent/HeaderContainer";
 import {Nav} from "../NavComponent/Nav";
 import {News} from "../NewsComponent/News";
 import {Music} from "../MusicComponent/Music";
@@ -20,7 +20,7 @@ const UsersContainer = lazy(() => import("../UsersComponent/UsersContainer"));
 const LoginContainer = lazy(() => import("../LoginComponent/Login"));
 
 
-export const App: React.FunctionComponent = () => {
+export const App: React.FC = () => {
     return (
         <HashRouter>
             <div className="app container">

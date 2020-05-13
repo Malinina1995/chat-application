@@ -2,7 +2,7 @@ import React  from "react";
 
 import "./News.css";
 
-export function News() {
+export const News:React.FC = () => {
     return (
         <div className='news-content'>
           News work!

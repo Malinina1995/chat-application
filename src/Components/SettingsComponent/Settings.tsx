@@ -2,7 +2,7 @@ import React  from "react";
 
 import "./Settings.css";
 
-export function Settings() {
+export const Settings: React.FC = () => {
     return (
         <div className='settings-content'>
           Settings work!

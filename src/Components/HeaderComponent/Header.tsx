@@ -2,17 +2,24 @@ import React  from "react";
 import { Link } from "react-router-dom";
 
 import "./Header.css";
+import {LogoutThunkCreatorType} from "./headerConnector";
 
-export function Header(props) {
+type Props = {
+    isAuth: boolean | undefined;
+    login: string | undefined;
+    logoutThunkCreator: LogoutThunkCreatorType
+}
+
+export const Header: React.FC<Props> = ({isAuth, login, logoutThunkCreator}) => {
   return (
     <div className="header d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom shadow-sm">
       <h5 className="my-0 mr-md-auto font-weight-normal">
         <Link to="/">IT-community</Link>
       </h5>
-      {props.isAuth ? (
+      {isAuth ? (
         <div>
-          <span className="login-name">{props.login}</span>
-          <button type="button" className="btn btn-outline-primary" onClick={props.logoutThunkCreator}>
+          <span className="login-name">{login}</span>
+          <button type="button" className="btn btn-outline-primary" onClick={logoutThunkCreator}>
             Logout
           </button>
         </div>

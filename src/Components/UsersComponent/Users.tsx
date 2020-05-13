@@ -4,7 +4,7 @@ import "react-pagination-js/dist/styles.css";
 import "./Users.css";
 import {User} from "./User";
 import {UserType} from "../../types";
-import {FollowHandler, UnfollowHandler} from "./connector";
+import {FollowHandler, UnfollowHandler} from "./usersConnector";
 
 type Props = {
     totalUsersCount: number;
@@ -16,7 +16,7 @@ type Props = {
     onCurrentPageChanged: (page: number) => void
 }
 
-export const Users: React.FunctionComponent<Props> = (props) => {
+export const Users: React.FC<Props> = (props) => {
     const {
         totalUsersCount,
         users,

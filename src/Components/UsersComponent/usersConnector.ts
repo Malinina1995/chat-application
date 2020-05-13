@@ -27,7 +27,7 @@ const mapDispatchToProps = {
     unfollowUserThunkCreator
 }
 
-export const connector = connect(mapStateToProps, mapDispatchToProps);
-export type PropsFromRedux = ConnectedProps<typeof connector>;
-export type FollowHandler = PropsFromRedux["followUserThunkCreator"];
-export type UnfollowHandler = PropsFromRedux["unfollowUserThunkCreator"];
+export const usersConnector = connect(mapStateToProps, mapDispatchToProps);
+export type UsersPropsFromRedux = ConnectedProps<typeof usersConnector>;
+export type FollowHandler = UsersPropsFromRedux["followUserThunkCreator"];
+export type UnfollowHandler = UsersPropsFromRedux["unfollowUserThunkCreator"];

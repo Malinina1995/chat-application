@@ -3,9 +3,9 @@ import { compose } from "redux";
 import { Users } from "./Users";
 import { authRedirect, authRedirectAwaiter } from "../../hoc/AuthRedirect";
 import { Preloader } from "../PreloaderComponent/Preloader";
-import {connector, PropsFromRedux} from "./connector";
+import {usersConnector, UsersPropsFromRedux} from "./usersConnector";
 
-type PropsType = PropsFromRedux & {};
+type PropsType = UsersPropsFromRedux & {};
 
 class UsersContainer extends Component<PropsType> {
   componentDidMount() {
@@ -48,7 +48,7 @@ class UsersContainer extends Component<PropsType> {
   }
 }
 
-export default compose<ComponentType<UsersContainer>>(connector,
+export default compose<ComponentType<UsersContainer>>(usersConnector,
   authRedirectAwaiter,
   authRedirect
 )(UsersContainer);

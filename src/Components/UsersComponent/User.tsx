@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 
 import "./Users.css";
 import {UserType} from "../../types";
-import {FollowHandler, UnfollowHandler} from "./connector";
+import {FollowHandler, UnfollowHandler} from "./usersConnector";
 
 type Props = {
     user: UserType;
@@ -12,7 +12,7 @@ type Props = {
     follow: FollowHandler;
 }
 
-export const User: React.FunctionComponent<Props> = ({user, followInProgress, unfollow, follow}) => {
+export const User: React.FC<Props> = ({user, followInProgress, unfollow, follow}) => {
     return (
         <div key={user.id * Math.random()} className="userItem">
             <div className="userItem-mainContainer">
