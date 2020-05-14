@@ -5,7 +5,7 @@ import { reduxForm } from "redux-form";
 import { Redirect } from 'react-router-dom';
 import {LoginThunkCreatorHandler, loginConnector} from "./loginConnector";
 
-type Props = {
+type LoginProps = {
   isAuth: boolean | undefined;
   captchaUrl: string | undefined;
   loginThunkCreator: LoginThunkCreatorHandler;
@@ -22,7 +22,7 @@ export type LoginFormType = {
   captchaUrl: string | undefined
 };
 
-const Login: React.FC<Props> = ({isAuth,captchaUrl, loginThunkCreator}) => {
+const Login: React.FC<LoginProps> = ({isAuth,captchaUrl, loginThunkCreator}) => {
   const onSubmit = (formData: LoginFormData) => {
     loginThunkCreator(formData.login, formData.password, formData.rememberMe, formData.captcha);
   }

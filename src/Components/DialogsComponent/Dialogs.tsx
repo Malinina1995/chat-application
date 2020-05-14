@@ -19,7 +19,7 @@ type SubmitHandler = (result: any, dispatch: Dispatch<any>,
 const afterSubmit: SubmitHandler = (result: any, dispatch: Dispatch<any>) =>
     dispatch(reset('addMessage'));
 
-type Props = {
+type DialogsProps = {
     dialogsPage: {
         dialogs: DialogType[],
         messages: MessageType[]
@@ -32,10 +32,12 @@ type FormDataType = {
     newMessageText: string
 }
 
-export const Dialogs: React.FC<Props> = ({
-                                             dialogsPage: {dialogs, messages},
-                                             isAuth, addMessage
-                                         }) => {
+export const Dialogs: React.FC<DialogsProps> = (props) => {
+    const {
+        dialogsPage: {dialogs, messages},
+        isAuth, addMessage
+    } = props;
+
     if (!isAuth) {
         return <Redirect to={"/login"}/>;
     }
@@ -68,8 +70,8 @@ export const Dialogs: React.FC<Props> = ({
 let maxLength100 = maxLength(100);
 
 type DialogsFormProps = {};
-type DialogsType = React.FC<DialogsFormProps & InjectedFormProps<FormDataType, DialogsFormProps>>;
-const DialogsForm: DialogsType = ({handleSubmit}) => {
+type DialogsFormType = React.FC<DialogsFormProps & InjectedFormProps<FormDataType, DialogsFormProps>>;
+const DialogsForm: DialogsFormType = ({handleSubmit}) => {
     return (
         <form
             className="message_messages-textarea-send"

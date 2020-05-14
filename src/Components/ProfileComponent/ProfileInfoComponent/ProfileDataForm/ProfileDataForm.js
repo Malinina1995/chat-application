@@ -66,7 +66,7 @@ const Contacts = ({contactsTitle, contactsValue}) => {
     return (
         <div>
             <span className="profile_info-title contacts">{contactsTitle}: </span>
-            <Field component={Input} type="text" name={`contacts.${contactsTitle}`}/>
+            <Field component={Input} type="text" name={`contacts.${contactsValue}`}/>
         </div>
     );
 };

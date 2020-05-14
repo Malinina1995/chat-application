@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import {Header} from './Header';
 import {AuthThunkCreatorType, headerConnector, LogoutThunkCreatorType} from "./headerConnector";
 
-type Props = {
+type HeaderContainerProps = {
     authThunkCreator: AuthThunkCreatorType;
     isAuth: boolean | undefined;
     login: string | undefined;
     logoutThunkCreator: LogoutThunkCreatorType
 }
 
-class HeaderContainer extends Component<Props> {
+class HeaderContainer extends Component<HeaderContainerProps> {
     componentDidMount() {
         this.props.authThunkCreator();
     }

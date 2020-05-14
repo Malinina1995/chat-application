@@ -5,9 +5,9 @@ import { Input } from "../../../FormControls/FormControls";
 import { required } from "../../../utils/validators/validators";
 import {LoginFormData, LoginFormType} from "../Login";
 
-type DialogsType = React.FC<LoginFormType & InjectedFormProps<LoginFormData, LoginFormType>>;
+type LoginFormTypeProps = React.FC<LoginFormType & InjectedFormProps<LoginFormData, LoginFormType>>;
 
-export let LoginForm: DialogsType = ({handleSubmit, error, captchaUrl}) => {
+export let LoginForm: LoginFormTypeProps = ({handleSubmit, error, captchaUrl}) => {
   return (
     <form className="login-form" onSubmit={handleSubmit}>
       <div className="form-group">

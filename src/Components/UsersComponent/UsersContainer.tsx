@@ -5,9 +5,9 @@ import { authRedirect, authRedirectAwaiter } from "../../hoc/AuthRedirect";
 import { Preloader } from "../PreloaderComponent/Preloader";
 import {usersConnector, UsersPropsFromRedux} from "./usersConnector";
 
-type PropsType = UsersPropsFromRedux & {};
+type UsersContainerPropsType = UsersPropsFromRedux & {};
 
-class UsersContainer extends Component<PropsType> {
+class UsersContainer extends Component<UsersContainerPropsType> {
   componentDidMount() {
     const {getUserThunkCreator, pageSize, currentPage} = this.props;
     getUserThunkCreator(pageSize, currentPage);

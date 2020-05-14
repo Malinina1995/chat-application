@@ -6,7 +6,7 @@ import {User} from "./User";
 import {UserType} from "../../types";
 import {FollowHandler, UnfollowHandler} from "./usersConnector";
 
-type Props = {
+type UsersProps = {
     totalUsersCount: number;
     users: UserType[];
     followInProgress: number[];
@@ -16,7 +16,7 @@ type Props = {
     onCurrentPageChanged: (page: number) => void
 }
 
-export const Users: React.FC<Props> = (props) => {
+export const Users: React.FC<UsersProps> = (props) => {
     const {
         totalUsersCount,
         users,

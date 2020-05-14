@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./ProfileStatus.css"
 
-export let ProfileStatusWithHooks = props => {
+
+export const ProfileStatusWithHooks = props => {
   let [editMode, setEditMode] = useState(false);
   let [status, setStatus] = useState(props.status);
 

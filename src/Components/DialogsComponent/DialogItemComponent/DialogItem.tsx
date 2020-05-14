@@ -3,12 +3,12 @@ import {NavLink} from "react-router-dom";
 
 import "./DialogItem.css";
 
-type Props = {
+type DialogItemProps = {
     name: string;
     path: number
 }
 
-export const DialogItem: React.FC<Props> = ({name,path}) => {
+export const DialogItem: React.FC<DialogItemProps> = ({name,path}) => {
     return (
         <div className="message_dialogs-item">
             <img className="message_dialogs-item-avatar"
