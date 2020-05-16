@@ -8,15 +8,16 @@ export type PostType = {
     message: string
 }
 
-type ContactsType = {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
+export type ContactsType = {
+    github: string;
+    vk: string;
+    facebook: string;
+    instagram: string;
+    twitter: string;
+    website: string;
+    youtube: string;
+    mainLink: string;
+    [key: string]: string;
 }
 
 export type ProfileType = {
@@ -25,7 +26,8 @@ export type ProfileType = {
     lookingForAJobDescription?: string;
     fullName?: string;
     contacts?: ContactsType;
-    photos?: PhotosType
+    photos?: PhotosType;
+    aboutMe?: string
 }
 
 export type UserType = {

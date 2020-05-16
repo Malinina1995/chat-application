@@ -1,11 +1,20 @@
 import React from "react";
-import {Field} from "redux-form";
+import {Field, InjectedFormProps} from "redux-form";
 import {Input, Textarea} from "../../../../FormControls/FormControls";
 import {reduxForm} from "redux-form";
 import {required} from "../../../../utils/validators/validators";
 import './ProfileDataForm.css';
+import {ContactsType, ProfileType} from "../../../../types";
 
-const ProfileDataForm = ({handleSubmit, initialValues, error}) => {
+type ProfileDataFormPropsType = {
+    initialValues: ProfileType;
+}
+
+//initialsValue cannot be renamed
+
+const ProfileDataForm: React.FC<InjectedFormProps<ProfileType,
+    ProfileDataFormPropsType> & ProfileDataFormPropsType> = ({handleSubmit, initialValues, error}) => {
+    const contacts = initialValues.contacts ?? ({} as ContactsType);
     return (
         <form onSubmit={handleSubmit}>
             <div>
@@ -45,12 +54,12 @@ const ProfileDataForm = ({handleSubmit, initialValues, error}) => {
                 />
             </div>
             <div className="profile_info-title">Contacts:</div>
-            {Object.keys(initialValues.contacts).map(key => {
+            {Object.keys(contacts).map(key => {
                 return (
                     <Contacts
                         key={key}
                         contactsTitle={key}
-                        contactsValue={initialValues.contacts[key]}
+                        contactsValue={contacts[key]}
                     />
                 );
             })}
@@ -62,7 +71,12 @@ const ProfileDataForm = ({handleSubmit, initialValues, error}) => {
     );
 };
 
-const Contacts = ({contactsTitle, contactsValue}) => {
+type ContactsPropsType = {
+    contactsTitle: string;
+    contactsValue: string | null | undefined;
+}
+
+const Contacts: React.FC<ContactsPropsType> = ({contactsTitle, contactsValue}) => {
     return (
         <div>
             <span className="profile_info-title contacts">{contactsTitle}: </span>
@@ -71,6 +85,6 @@ const Contacts = ({contactsTitle, contactsValue}) => {
     );
 };
 
-export const ProfileDataFormReduxForm = reduxForm({
+export const ProfileDataFormReduxForm = reduxForm<ProfileType, ProfileDataFormPropsType>({
     form: "edit-profile"
 })(ProfileDataForm);

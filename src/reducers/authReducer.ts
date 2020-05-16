@@ -1,10 +1,12 @@
 import {authAPI, securityAPI} from "../api/api";
-import {stopSubmit} from "redux-form";
+import {FormAction, stopSubmit} from "redux-form";
+import {ThunkAction} from "redux-thunk";
+import {AppReducerType} from "../redux-store";
 
 const SET_USER_DATA = "auth/SET-USER-DATA";
 const GET_CAPTCHA_URL = "auth/GET-CAPTCHA-URL";
 
-type InitialStateType = {
+type AuthInitialStateType = {
     userId?: number,
     email?: string,
     login?: string,
@@ -12,7 +14,7 @@ type InitialStateType = {
     captchaURL?: string
 }
 
-let initialState: InitialStateType = {
+let initialState: AuthInitialStateType = {
     userId: undefined,
     email: undefined,
     login: undefined,
@@ -20,9 +22,10 @@ let initialState: InitialStateType = {
     captchaURL: undefined
 };
 
-type StateAction = SetUserDataActionCreatorType | GetCaptchaUrlActionCreatorType;
+type AuthStateActions = SetUserDataActionCreatorType | GetCaptchaUrlActionCreatorType;
+type AuthThunkType = ThunkAction<Promise<void>, AppReducerType, unknown, AuthStateActions | FormAction>;
 
-export let authReducer = (state = initialState, action: StateAction): InitialStateType => {
+export let authReducer = (state = initialState, action: AuthStateActions): AuthInitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
             return {
@@ -81,8 +84,8 @@ export const getCaptchaUrlActionCreator = (captchaUrl: string): GetCaptchaUrlAct
     };
 };
 
-export const authThunkCreator = () => {
-    return async (dispatch: any) => {
+export const authThunkCreator = (): AuthThunkType => {
+    return async (dispatch) => {
         let res = await authAPI.getAuth();
         if (res.resultCode === 0) {
             let {id, email, login} = res.data;
@@ -93,22 +96,22 @@ export const authThunkCreator = () => {
     };
 };
 
-export const loginThunkCreator = (email: string, password: string, rememberMe: boolean, captcha: string) => {
-    return async (dispatch: any) => {
+export const loginThunkCreator = (email: string, password: string, rememberMe: boolean, captcha: string): AuthThunkType => {
+    return async (dispatch) => {
         let res = await authAPI.login(email, password, rememberMe, captcha);
         if (res.resultCode === 0) {
-            dispatch(authThunkCreator());
+            await dispatch(authThunkCreator());
         } else {
             if (res.resultCode === 10) {
-                dispatch(getCaptchaURLThunkCreator());
+                await dispatch(getCaptchaURLThunkCreator());
             }
             dispatch(stopSubmit("login", {_error: res.messages}));
         }
     };
 };
 
-export const logoutThunkCreator = () => {
-    return async (dispatch: any) => {
+export const logoutThunkCreator = (): AuthThunkType => {
+    return async (dispatch) => {
         let res = await authAPI.logout();
         if (res.resultCode === 0) {
             dispatch(setUserDataActionCreator(undefined, undefined, undefined, false));
@@ -116,8 +119,8 @@ export const logoutThunkCreator = () => {
     };
 };
 
-export const getCaptchaURLThunkCreator = () => {
-    return async (dispatch: any) => {
+export const getCaptchaURLThunkCreator = (): AuthThunkType => {
+    return async (dispatch) => {
         let res = await securityAPI.getCaptchaURL();
         dispatch(getCaptchaUrlActionCreator(res.url));
     };

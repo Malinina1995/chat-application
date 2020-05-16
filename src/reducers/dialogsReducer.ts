@@ -2,12 +2,12 @@ import {DialogType, MessageType} from "../types";
 
 const ADD_MESSAGE = "dialogs/ADD-MESSAGE";
 
-type InitialStateType = {
+type DialogsInitialStateType = {
     dialogs: DialogType[];
     messages: MessageType[]
 }
 
-let initialState: InitialStateType = {
+let initialState: DialogsInitialStateType = {
     dialogs: [
         {id: 1, name: "Vasya"},
         {id: 2, name: "Tanya"},
@@ -24,9 +24,9 @@ let initialState: InitialStateType = {
     ]
 };
 
-type StateAction = AddMessageActionCreatorType;
+type DialogsStateActions = AddMessageActionCreatorType;
 
-export let dialogsReducer = (state = initialState, action: StateAction): InitialStateType => {
+export let dialogsReducer = (state = initialState, action: DialogsStateActions): DialogsInitialStateType => {
     switch (action.type) {
         case ADD_MESSAGE:
             let text = action.newText;

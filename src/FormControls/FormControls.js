@@ -2,7 +2,7 @@ import React from 'react';
 import './FormControls.css';
 let classNames = require('classnames');
 
-export const Textarea = ({input, meta: { touched, error, warning }, placeholder, ...props}) => {
+export const Textarea = ({input, meta: { touched, error }, placeholder, ...props}) => {
   const hasError =  touched && error;
   const classesForTextarea = classNames({
     'form-control': true,
@@ -16,7 +16,7 @@ export const Textarea = ({input, meta: { touched, error, warning }, placeholder,
   )
 }
 
-export const Input = ({input, meta: { touched, error, warning }, placeholder, ...props}) => {
+export const Input = ({input, meta: { touched, error }, placeholder, ...props}) => {
   const hasError =  touched && error;
   const classesForTextarea = classNames({
     'form-control': true,

@@ -1,5 +1,5 @@
 import React, {lazy} from "react";
-import {HashRouter, Redirect, Route, Switch} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 
 import HeaderContainer from "../HeaderComponent/HeaderContainer";
 import {Nav} from "../NavComponent/Nav";
@@ -9,6 +9,9 @@ import {Settings} from "../SettingsComponent/Settings";
 import {withSuspense} from "../../hoc/withSuspanse";
 import "./App.css";
 import {NotFound} from "../404/404";
+import { ConnectedRouter } from "connected-react-router";
+import { history } from '../../redux-store';
+import {UserNotFound} from "../ProfileComponent/notFound";
 
 const ProfileContainer = lazy(() =>
     import("../ProfileComponent/ProfileContainer")
@@ -22,13 +25,14 @@ const LoginContainer = lazy(() => import("../LoginComponent/Login"));
 
 export const App: React.FC = () => {
     return (
-        <HashRouter>
+        <ConnectedRouter history={history}>
             <div className="app container">
                 <HeaderContainer/>
                 <div className="content">
                     <Nav/>
                     <div className="main-content">
                         <Switch>
+                            <Route path='/profile/error' render={UserNotFound}/>
                             <Route
                                 path="/profile/:userId?"
                                 render={withSuspense(ProfileContainer)}
@@ -45,5 +49,5 @@ export const App: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </HashRouter>);
+        </ConnectedRouter>);
 }
