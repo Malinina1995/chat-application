@@ -7,9 +7,9 @@ import { authReducer } from "./reducers/authReducer";
 import thunkMiddleware from "redux-thunk";
 import { reducer as formReducer } from 'redux-form';
 import {connectRouter, routerMiddleware} from 'connected-react-router';
-import { createBrowserHistory } from 'history';
+import { createHashHistory } from 'history';
 
-export const history = createBrowserHistory();
+export const history = createHashHistory();
 
 let reducers = combineReducers({
   profilePage: profileReducer,

@@ -9,8 +9,8 @@ import {Settings} from "../SettingsComponent/Settings";
 import {withSuspense} from "../../hoc/withSuspanse";
 import "./App.css";
 import {NotFound} from "../404/404";
-import { ConnectedRouter } from "connected-react-router";
-import { history } from '../../redux-store';
+import {ConnectedRouter} from "connected-react-router";
+import {history} from '../../redux-store';
 import {UserNotFound} from "../ProfileComponent/notFound";
 
 const ProfileContainer = lazy(() =>
