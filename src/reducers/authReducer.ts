@@ -1,4 +1,4 @@
-import {authAPI, securityAPI} from "../api/api";
+import {authAPI, ResultCodeForCaptcha, ResultCodes, securityAPI} from "../api/api";
 import {FormAction, stopSubmit} from "redux-form";
 import {ThunkAction} from "redux-thunk";
 import {AppReducerType} from "../redux-store";
@@ -87,7 +87,7 @@ export const getCaptchaUrlActionCreator = (captchaUrl: string): GetCaptchaUrlAct
 export const authThunkCreator = (): AuthThunkType => {
     return async (dispatch) => {
         let res = await authAPI.getAuth();
-        if (res.resultCode === 0) {
+        if (res.resultCode === ResultCodes.Success) {
             let {id, email, login} = res.data;
             dispatch(setUserDataActionCreator(id, email, login, true));
         } else {
@@ -99,10 +99,10 @@ export const authThunkCreator = (): AuthThunkType => {
 export const loginThunkCreator = (email: string, password: string, rememberMe: boolean, captcha: string): AuthThunkType => {
     return async (dispatch) => {
         let res = await authAPI.login(email, password, rememberMe, captcha);
-        if (res.resultCode === 0) {
+        if (res.resultCode === ResultCodes.Success) {
             await dispatch(authThunkCreator());
         } else {
-            if (res.resultCode === 10) {
+            if (res.resultCode === ResultCodeForCaptcha.CaptchaIsRequired) {
                 await dispatch(getCaptchaURLThunkCreator());
             }
             dispatch(stopSubmit("login", {_error: res.messages}));
@@ -113,7 +113,7 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
 export const logoutThunkCreator = (): AuthThunkType => {
     return async (dispatch) => {
         let res = await authAPI.logout();
-        if (res.resultCode === 0) {
+        if (res.resultCode === ResultCodes.Success) {
             dispatch(setUserDataActionCreator(undefined, undefined, undefined, false));
         }
     };

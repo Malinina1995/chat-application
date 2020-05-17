@@ -52,7 +52,6 @@ class ProfileContainer extends Component<ProfileContainerProps> {
 
     render() {
         const isOwner = !this.props.match.params.userId;
-        debugger
         return <>
             {!this.props.profile ? (
                 <Preloader/>

@@ -1,4 +1,4 @@
-import {profileAPI} from "../api/api";
+import {profileAPI, ResultCodes} from "../api/api";
 import {FormAction, stopSubmit} from "redux-form";
 import {PhotosType, PostType, ProfileType} from "../types";
 import {CallHistoryMethodAction, push} from "connected-react-router";
@@ -144,27 +144,27 @@ export const getUserStatusThunkCreator = (id: number): ProfileThunkType => {
 export const updateUserStatusThunkCreator = (status: string): ProfileThunkType => {
     return async (dispatch) => {
         let res = await profileAPI.updateStatus(status);
-        if (res.resultCode === 0) dispatch(getUserStatusActionCreator(status));
+        if (res.resultCode === ResultCodes.Success) dispatch(getUserStatusActionCreator(status));
     };
 };
 
 export const savePhotoThunkCreator = (file: File): ProfileThunkType => {
     return async (dispatch) => {
         let res = await profileAPI.savePhoto(file);
-        if (res.resultCode === 0) dispatch(savePhotoActionCreator(res.data.photos));
+        if (res.resultCode === ResultCodes.Success) dispatch(savePhotoActionCreator(res.data.photos));
     };
 }
 
 export const saveDataThunkCreator = (data: ProfileType): ProfileThunkType => {
     return async (dispatch, getState) => {
         let res = await profileAPI.saveProfile(data);
-        if (res.resultCode === 0) {
+        if (res.resultCode === ResultCodes.Success) {
             let id = getState().auth.userId;
             if (!id){
                 dispatch(push('/profile/error'));
                 return;
             }
-            dispatch(getUserThunkCreator(id));
+            await dispatch(getUserThunkCreator(id));
         } else {
             dispatch(stopSubmit("edit-profile", {_error: res.messages[0]}));
             return Promise.reject(res.messages[0]);

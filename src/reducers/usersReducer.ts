@@ -1,4 +1,4 @@
-import {usersAPI} from "../api/api";
+import {ResultCodes, ResultType, usersAPI} from "../api/api";
 import {UserType} from "../types";
 import {ThunkAction} from "redux-thunk";
 import {AppReducerType} from "../redux-store";
@@ -195,11 +195,11 @@ export const getUserThunkCreator = (pageSize: number, currentPage: number): User
     };
 };
 
-const _followUnfollowMethod = async (dispatch: DispatchType, id: number, apiMethod: any,
+const _followUnfollowMethod = async (dispatch: DispatchType, id: number, apiMethod: (id: number) => Promise<ResultType>,
                                      actionCreator: (id: number) => UsersStateActions) => {
     dispatch(followingInProgressActionCreator(true, id));
     let res = await apiMethod(id);
-    if (res.resultCode === 0) {
+    if (res.resultCode === ResultCodes.Success) {
         dispatch(actionCreator(id));
     }
     dispatch(followingInProgressActionCreator(false, id));

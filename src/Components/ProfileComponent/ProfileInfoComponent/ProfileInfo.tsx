@@ -38,7 +38,6 @@ export const ProfileInfo: React.FC<ProfileProps> = (props) => {
     const imagePath = profile.photos?.large
         ? profile.photos.large
         : "https://avatars.mds.yandex.net/get-pdb/1732371/78b3b128-3813-4d35-8b87-b3c911581ca0/s1200?webp=false";
-    debugger
     return (
         <>
             <div className="profile_info">
