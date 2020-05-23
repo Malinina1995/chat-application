@@ -2,10 +2,17 @@ import {DialogType, MessageType} from "../types";
 
 const ADD_MESSAGE = "dialogs/ADD-MESSAGE";
 
+
 type DialogsInitialStateType = {
     dialogs: DialogType[];
     messages: MessageType[]
 }
+type AddMessageActionCreatorType = {
+    type: typeof ADD_MESSAGE;
+    newText: string
+}
+type DialogsStateActions = AddMessageActionCreatorType;
+
 
 let initialState: DialogsInitialStateType = {
     dialogs: [
@@ -24,7 +31,6 @@ let initialState: DialogsInitialStateType = {
     ]
 };
 
-type DialogsStateActions = AddMessageActionCreatorType;
 
 export let dialogsReducer = (state = initialState, action: DialogsStateActions): DialogsInitialStateType => {
     switch (action.type) {
@@ -48,10 +54,6 @@ export let dialogsReducer = (state = initialState, action: DialogsStateActions):
     }
 };
 
-type AddMessageActionCreatorType = {
-    type: typeof ADD_MESSAGE;
-    newText: string
-}
 
 export const addMessageActionCreator = (text:string): AddMessageActionCreatorType => {
     return {

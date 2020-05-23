@@ -1,10 +1,13 @@
-import {authAPI, ResultCodeForCaptcha, ResultCodes, securityAPI} from "../api/api";
+import {ResultCodeForCaptcha, ResultCodes} from "../api/api";
 import {FormAction, stopSubmit} from "redux-form";
 import {ThunkAction} from "redux-thunk";
 import {AppReducerType} from "../redux-store";
+import {authAPI} from "../api/auth-api";
+import {securityAPI} from "../api/security-api";
 
 const SET_USER_DATA = "auth/SET-USER-DATA";
 const GET_CAPTCHA_URL = "auth/GET-CAPTCHA-URL";
+
 
 type AuthInitialStateType = {
     userId?: number,
@@ -13,6 +16,23 @@ type AuthInitialStateType = {
     isAuth?: boolean,
     captchaURL?: string
 }
+type AuthStateActions = SetUserDataActionCreatorType | GetCaptchaUrlActionCreatorType;
+type AuthThunkType = ThunkAction<Promise<void>, AppReducerType, unknown, AuthStateActions | FormAction>;
+type SetUserDataActionCreatorDataType = {
+    userId?: number;
+    email?: string;
+    login?: string;
+    captcha?: string;
+}
+type SetUserDataActionCreatorType = {
+    type: typeof SET_USER_DATA;
+    data: SetUserDataActionCreatorDataType
+}
+type GetCaptchaUrlActionCreatorType = {
+    type: typeof GET_CAPTCHA_URL;
+    captchaUrl: string
+}
+
 
 let initialState: AuthInitialStateType = {
     userId: undefined,
@@ -22,8 +42,6 @@ let initialState: AuthInitialStateType = {
     captchaURL: undefined
 };
 
-type AuthStateActions = SetUserDataActionCreatorType | GetCaptchaUrlActionCreatorType;
-type AuthThunkType = ThunkAction<Promise<void>, AppReducerType, unknown, AuthStateActions | FormAction>;
 
 export let authReducer = (state = initialState, action: AuthStateActions): AuthInitialStateType => {
     switch (action.type) {
@@ -43,17 +61,6 @@ export let authReducer = (state = initialState, action: AuthStateActions): AuthI
     }
 };
 
-type SetUserDataActionCreatorDataType = {
-    userId?: number;
-    email?: string;
-    login?: string;
-    captcha?: string;
-}
-
-type SetUserDataActionCreatorType = {
-    type: typeof SET_USER_DATA;
-    data: SetUserDataActionCreatorDataType
-}
 
 export const setUserDataActionCreator =
     (userId?: number,
@@ -72,17 +79,13 @@ export const setUserDataActionCreator =
         };
     };
 
-type GetCaptchaUrlActionCreatorType = {
-    type: typeof GET_CAPTCHA_URL;
-    captchaUrl: string
-}
-
 export const getCaptchaUrlActionCreator = (captchaUrl: string): GetCaptchaUrlActionCreatorType => {
     return {
         type: GET_CAPTCHA_URL,
         captchaUrl
     };
 };
+
 
 export const authThunkCreator = (): AuthThunkType => {
     return async (dispatch) => {

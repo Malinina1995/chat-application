@@ -1,9 +1,10 @@
-import {profileAPI, ResultCodes} from "../api/api";
+import {ResultCodes} from "../api/api";
 import {FormAction, stopSubmit} from "redux-form";
 import {PhotosType, PostType, ProfileType} from "../types";
 import {CallHistoryMethodAction, push} from "connected-react-router";
 import {ThunkAction} from "redux-thunk";
 import {AppReducerType} from "../redux-store";
+import {profileAPI} from "../api/profile-api";
 
 const ADD_POST = "profile/ADD-POST";
 const SET_USER_PROFILE = "profile/SET-USER-PROFILE";
@@ -16,6 +17,29 @@ type ProfileInitialStateType = {
     profile: ProfileType | undefined;
     status: string
 }
+type ProfileStateActions = AddPostActionCreatorType
+    | SetUserProfileActionCreatorType
+    | GetUserStatusActionCreatorType
+    | SavePhotoActionCreatorType
+    | CallHistoryMethodAction;
+type ProfileThunkType = ThunkAction<Promise<void>, AppReducerType, unknown, ProfileStateActions | FormAction>;
+type AddPostActionCreatorType = {
+    type: typeof ADD_POST;
+    text: string
+}
+type SetUserProfileActionCreatorType = {
+    type: typeof SET_USER_PROFILE;
+    profile: ProfileType
+}
+type GetUserStatusActionCreatorType = {
+    type: typeof GET_USER_STATUS;
+    status: string
+}
+type SavePhotoActionCreatorType = {
+    type: typeof SET_USER_PHOTO;
+    file: PhotosType
+}
+
 
 let initialState: ProfileInitialStateType = {
     posts: [
@@ -27,13 +51,6 @@ let initialState: ProfileInitialStateType = {
     status: ""
 };
 
-type ProfileStateActions = AddPostActionCreatorType
-    | SetUserProfileActionCreatorType
-    | GetUserStatusActionCreatorType
-    | SavePhotoActionCreatorType
-    | CallHistoryMethodAction;
-
-type ProfileThunkType = ThunkAction<Promise<void>, AppReducerType, unknown, ProfileStateActions | FormAction>;
 
 export let profileReducer = (state = initialState, action: ProfileStateActions): ProfileInitialStateType => {
     switch (action.type) {
@@ -75,10 +92,6 @@ export let profileReducer = (state = initialState, action: ProfileStateActions):
     }
 };
 
-type AddPostActionCreatorType = {
-    type: typeof ADD_POST;
-    text: string
-}
 
 export const addPostActionCreator = (text: string): AddPostActionCreatorType => {
     return {
@@ -87,22 +100,12 @@ export const addPostActionCreator = (text: string): AddPostActionCreatorType => 
     };
 };
 
-type SetUserProfileActionCreatorType = {
-    type: typeof SET_USER_PROFILE;
-    profile: ProfileType
-}
-
 export const setUserProfileActionCreator = (profile: ProfileType): SetUserProfileActionCreatorType => {
     return {
         type: SET_USER_PROFILE,
         profile
     };
 };
-
-type GetUserStatusActionCreatorType = {
-    type: typeof GET_USER_STATUS;
-    status: string
-}
 
 export const getUserStatusActionCreator = (status: string): GetUserStatusActionCreatorType => {
     return {
@@ -111,17 +114,13 @@ export const getUserStatusActionCreator = (status: string): GetUserStatusActionC
     };
 };
 
-type SavePhotoActionCreatorType = {
-    type: typeof SET_USER_PHOTO;
-    file: PhotosType
-}
-
 export const savePhotoActionCreator = (file: PhotosType): SavePhotoActionCreatorType => {
     return {
         type: SET_USER_PHOTO,
         file
     };
 };
+
 
 export const getUserThunkCreator = (id: number): ProfileThunkType => {
     return async (dispatch) => {

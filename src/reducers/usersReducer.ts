@@ -1,8 +1,9 @@
-import {ResultCodes, ResultType, usersAPI} from "../api/api";
+import {ResultCodes, ResultType} from "../api/api";
 import {UserType} from "../types";
 import {ThunkAction} from "redux-thunk";
 import {AppReducerType} from "../redux-store";
 import {Dispatch} from "redux";
+import {usersAPI} from "../api/users-api";
 
 const FOLLOW = "user/FOLLOW";
 const UNFOLLOW = "user/UNFOLLOW";
@@ -21,16 +22,6 @@ type UsersInitialStateType = {
     isFetching: boolean;
     followInProgress: number[]; // arrays of usersId
 }
-
-let initialState: UsersInitialStateType = {
-    users: [],
-    pageSize: 10,
-    totalUsersCount: 0,
-    currentPage: 1,
-    isFetching: true,
-    followInProgress: []
-};
-
 type UsersStateActions = FollowActionCreatorType
     | UnfollowActionCreatorType
     | SetUsersActionCreatorType
@@ -41,6 +32,45 @@ type UsersStateActions = FollowActionCreatorType
 
 type UsersThunkType = ThunkAction<Promise<void>, AppReducerType, unknown, UsersStateActions>;
 type DispatchType = Dispatch<UsersStateActions>;
+type FollowActionCreatorType = {
+    type: typeof FOLLOW;
+    userId: number
+}
+type UnfollowActionCreatorType = {
+    type: typeof UNFOLLOW;
+    userId: number
+}
+type SetUsersActionCreatorType = {
+    type: typeof SET_USERS;
+    users: UserType[]
+}
+type SetCurrentPageActionCreatorType = {
+    type: typeof SET_CURRENT_PAGE;
+    currentPage: number
+}
+
+let initialState: UsersInitialStateType = {
+    users: [],
+    pageSize: 10,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: true,
+    followInProgress: []
+};
+type SetTotalUserCountActionCreatorType = {
+    type: typeof SET_TOTAL_USER_COUNT;
+    totalUsersCount: number
+}
+type ToggleIsFetchingActionCreatorType = {
+    type: typeof TOGGLE_IS_FETCHING;
+    isFetching: boolean
+}
+type FollowingInProgressActionCreatorType = {
+    type: typeof TOGGLE_IS_FOLLOWING_PROGRESS;
+    isFetching: boolean;
+    userId: number
+}
+
 
 export let usersReducer = (state = initialState, action: UsersStateActions): UsersInitialStateType => {
     switch (action.type) {
@@ -97,10 +127,6 @@ export let usersReducer = (state = initialState, action: UsersStateActions): Use
     }
 };
 
-type FollowActionCreatorType = {
-    type: typeof FOLLOW;
-    userId: number
-}
 
 const followActionCreator = (userId: number): FollowActionCreatorType => {
     return {
@@ -109,22 +135,12 @@ const followActionCreator = (userId: number): FollowActionCreatorType => {
     };
 };
 
-type UnfollowActionCreatorType = {
-    type: typeof UNFOLLOW;
-    userId: number
-}
-
 const unfollowActionCreator = (userId: number): UnfollowActionCreatorType => {
     return {
         type: UNFOLLOW,
         userId
     };
 };
-
-type SetUsersActionCreatorType = {
-    type: typeof SET_USERS;
-    users: UserType[]
-}
 
 const setUsersActionCreator = (users: UserType[]): SetUsersActionCreatorType => {
     return {
@@ -133,22 +149,12 @@ const setUsersActionCreator = (users: UserType[]): SetUsersActionCreatorType => 
     };
 };
 
-type SetCurrentPageActionCreatorType = {
-    type: typeof SET_CURRENT_PAGE;
-    currentPage: number
-}
-
 const setCurrentPageActionCreator = (currentPage: number): SetCurrentPageActionCreatorType => {
     return {
         type: SET_CURRENT_PAGE,
         currentPage
     };
 };
-
-type SetTotalUserCountActionCreatorType = {
-    type: typeof SET_TOTAL_USER_COUNT;
-    totalUsersCount: number
-}
 
 const setTotalUserCountActionCreator = (totalUsersCount: number): SetTotalUserCountActionCreatorType => {
     return {
@@ -157,23 +163,12 @@ const setTotalUserCountActionCreator = (totalUsersCount: number): SetTotalUserCo
     };
 };
 
-type ToggleIsFetchingActionCreatorType = {
-    type: typeof TOGGLE_IS_FETCHING;
-    isFetching: boolean
-}
-
 const toggleIsFetchingActionCreator = (isFetching: boolean): ToggleIsFetchingActionCreatorType => {
     return {
         type: TOGGLE_IS_FETCHING,
         isFetching
     };
 };
-
-type FollowingInProgressActionCreatorType = {
-    type: typeof TOGGLE_IS_FOLLOWING_PROGRESS;
-    isFetching: boolean;
-    userId: number
-}
 
 const followingInProgressActionCreator = (isFetching: boolean, userId: number): FollowingInProgressActionCreatorType => {
     return {
@@ -182,6 +177,7 @@ const followingInProgressActionCreator = (isFetching: boolean, userId: number): 
         userId
     };
 };
+
 
 export const getUserThunkCreator = (pageSize: number, currentPage: number): UsersThunkType => {
     return async (dispatch) => {
